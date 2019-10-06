@@ -9,7 +9,7 @@ import PhotoGrid from "./PhotoGrid"
 import Notification from "./Notification"
 
 const StyledNav = styled.nav`
-  padding-bottom: 1.5rem;
+  padding: 1.5rem;
   li {
     display: block;
     margin-bottom: 1.5rem;
@@ -27,7 +27,7 @@ const StyledNav = styled.nav`
 
 const MessageWrapper = styled.div`
   display: none;
-  padding: 2rem;
+  padding-bottom: 2rem;
 
   @media (min-width: 768px) {
     display: block;
