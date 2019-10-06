@@ -5,7 +5,7 @@ import { StyledCollapseHandler } from "./styled-components"
 
 const StyledEmailList = styled.ul``
 
-const messageIds = [...new Array(25).keys()]
+const messageIds = [...new Array(30).keys()]
 
 const emails = [
   {
@@ -65,7 +65,9 @@ const Demo = () => {
     })
     collapseHandlerRef.current.style.transition = "none"
     collapseHandlerRef.current.style.transform = `translateY(71px)`
-    componentsAfter.forEach(c => collapseHandlerRef.current.appendChild(c))
+    const fragment = document.createDocumentFragment()
+    componentsAfter.forEach(c => fragment.appendChild(c))
+    collapseHandlerRef.current.appendChild(fragment)
 
     requestAnimationFrame(() => {
       collapseHandlerRef.current.style.transition = ""
