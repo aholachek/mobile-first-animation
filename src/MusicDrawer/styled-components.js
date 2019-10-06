@@ -76,7 +76,7 @@ export const ClosedControlsContainer = styled.div`
   top: 1.7rem;
   right: 12px;
 
-  img {
+  svg {
     width: 2.25rem;
     height: auto;
     opacity: 0.6;
@@ -97,12 +97,12 @@ export const OpenControlsContainer = styled.div`
     display: flex;
     justify-content: center;
   }
-  img {
+  svg {
     opacity: 0.7;
     width: 3.5rem;
     height: 3.5rem;
   }
-  img:nth-of-type(2) {
+  svg:nth-of-type(2) {
     width: 5rem;
     height: 3.5rem;
   }
@@ -163,7 +163,7 @@ export const TabBar = styled.div`
   background-color: white;
 `
 
-export const TabBarItem = styled.img`
+export const TabBarItem = styled.div`
   opacity: 0.5;
 `
 

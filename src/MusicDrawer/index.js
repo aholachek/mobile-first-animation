@@ -28,17 +28,17 @@ import useWindowSize from "../useWindowSize"
 
 import Playlist from "./Playlist"
 
-import likeImg from "./assets/like.svg"
-import playlist from "./assets/playlist.svg"
-import radio from "./assets/radio.svg"
-import search from "./assets/search.svg"
-import song from "./assets/song.svg"
-import play from "./assets/play.svg"
-import rewind from "./assets/rewind.svg"
-import fastForward from "./assets/fast-forward.svg"
+import { ReactComponent as LikeIcon } from "./assets/like.svg"
+import { ReactComponent as PlaylistIcon } from "./assets/playlist.svg"
+import { ReactComponent as RadioIcon } from "./assets/radio.svg"
+import { ReactComponent as SearchIcon } from "./assets/search.svg"
+import { ReactComponent as SongIcon } from "./assets/song.svg"
+import { ReactComponent as PlayIcon } from "./assets/play.svg"
+import { ReactComponent as RewindIcon } from "./assets/rewind.svg"
+import { ReactComponent as FastForwardIcon } from "./assets/fast-forward.svg"
 import snapJudgement from "./assets/snap-judgement.jpg"
 
-const tabIcons = [likeImg, playlist, radio, search, song]
+const tabIcons = [LikeIcon, PlaylistIcon, RadioIcon, SearchIcon, SongIcon]
 
 const drawerHeight = 160
 const nowPlayingImageDimensions = 70
@@ -217,8 +217,8 @@ const ApplePlaylist = () => {
               opacity: y.interpolate([0, stops.slice(-1)[0] / 2], [1, 0])
             }}
           >
-            <img src={play} alt="" draggable={false} />
-            <img src={fastForward} alt="" draggable={false} />
+            <PlayIcon />
+            <FastForwardIcon />
           </ClosedControlsContainer>
         </Flex>
         <OpenControlsContainer
@@ -230,9 +230,9 @@ const ApplePlaylist = () => {
           <Title>Head Games</Title>
           <Subtitle>Snap Judgement</Subtitle>
           <div>
-            <img src={rewind} alt="" draggable="false" />
-            <img src={play} alt="" draggable="false" />
-            <img src={fastForward} alt="" draggable="false" />
+            <RewindIcon />
+            <PlayIcon />
+            <FastForwardIcon />
           </div>
         </OpenControlsContainer>
       </NowPlayingDrawer>
@@ -246,8 +246,10 @@ const ApplePlaylist = () => {
           })
         }}
       >
-        {tabIcons.map(icon => (
-          <TabBarItem src={icon} />
+        {tabIcons.map(Icon => (
+          <TabBarItem>
+            <Icon />
+          </TabBarItem>
         ))}
       </TabBar>
     </Container>
