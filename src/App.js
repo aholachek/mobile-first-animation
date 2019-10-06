@@ -6,6 +6,7 @@ import SwipeableTabs from "./SwipeableTabs"
 import EmailList from "./EmailList"
 import MusicDrawer from "./MusicDrawer"
 import PhotoGrid from "./PhotoGrid"
+import Notification from "./Notification"
 
 const StyledNav = styled.nav`
   padding: 1.5rem;
@@ -36,8 +37,8 @@ const MessageWrapper = styled.div`
 const MobileWarning = () => {
   return (
     <MessageWrapper>
-      These demos should be viewed on a mobile device, an emulator or the mobile
-      view in your devtools.
+      These demos should ideally be viewed on a mobile device, an emulator or
+      the mobile view in your devtools.
     </MessageWrapper>
   )
 }
@@ -50,7 +51,8 @@ const routes = [
     component: SwipeableTabs,
     title: "Swipeable Tabs"
   },
-  { path: "/photo-grid", component: PhotoGrid, title: "Photo Grid" }
+  { path: "/photo-grid", component: PhotoGrid, title: "Photo Grid" },
+  { path: "/notification", component: Notification, title: "Notification" }
 ]
 
 function App() {

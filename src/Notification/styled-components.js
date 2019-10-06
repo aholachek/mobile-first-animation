@@ -1,0 +1,39 @@
+import styled from "styled-components"
+
+export const StyledNotification = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  padding: .5rem 2rem .5rem 2rem;
+  background-color: #171226;
+  color: white;
+  box-shadow: 0 0 0 1px transparent, 0 3px 10px #00000026;
+  user-select: none;
+  min-width: 70vw;
+  pointer-events: all;
+  font-size: 1.2rem;
+  display:flex;
+  align-items: center;
+  > div:first-of-type {
+    font-size: 2rem;
+    margin-right: .5rem;
+  }
+`
+
+export const StyledNotificationContainer = styled.div`
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`
+
+export const StyledContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 4rem);
+`
