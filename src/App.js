@@ -28,6 +28,8 @@ const StyledNav = styled.nav`
 const MessageWrapper = styled.div`
   display: none;
   padding-bottom: 2rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
 
   @media (min-width: 768px) {
     display: block;
