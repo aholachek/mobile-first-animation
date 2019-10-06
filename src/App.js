@@ -9,7 +9,7 @@ import PhotoGrid from "./PhotoGrid"
 import Notification from "./Notification"
 
 const StyledNav = styled.nav`
-  padding: 1.5rem;
+  padding-bottom: 1.5rem;
   li {
     display: block;
     margin-bottom: 1.5rem;
@@ -68,7 +68,7 @@ function App() {
             render={() => {
               return (
                 <StyledNav>
-                  <h1>Touch-driven mobile animation</h1>
+                  <h1>Touch-driven mobile animation examples</h1>
                   <ul>
                     {routes.map(r => {
                       return (
