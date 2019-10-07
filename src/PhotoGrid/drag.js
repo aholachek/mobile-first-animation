@@ -11,7 +11,7 @@ export const yStops = [0, maxYTranslate]
 const xStops = [-20, 20]
 
 const drag = ({
-  unsetSelectedImage,
+  onImageDismiss,
   x,
   y,
   v,
@@ -37,24 +37,31 @@ const drag = ({
     const projectedEndpoint = y.value + projection(velocityY, "fast")
     const point = findNearestNumberInArray(projectedEndpoint, yStops)
 
+    const baseSettings = {
+      immediate: false,
+      config: {
+        velocity: v.lastVelocity
+      }
+    }
+
     if (point === yStops[1]) {
       return set({
+        ...baseSettings,
         y: point,
-        immediate: false,
-        velocity: v.lastVelocity,
         onFrame: () => {
           if (Math.abs(y.lastVelocity) < 1500) {
-            unsetSelectedImage()
+            onImageDismiss()
+            set({
+              onFrame: null
+            })
           }
         }
       })
     } else {
       return set({
+        ...baseSettings,
         y: 0,
-        x: 0,
-        imgScale: 1,
-        immediate: false,
-        velocity: v.lastVelocity
+        x: 0
       })
     }
   }
@@ -62,21 +69,13 @@ const drag = ({
   const newY = rubberBandIfOutOfBounds(yStops[0], yStops[1], movementY + memo.y)
   const newX = rubberBandIfOutOfBounds(xStops[0], xStops[1], movementX + memo.x)
 
-  const scaleRange = [1, 0.8]
-  const imgScale = rubberBandIfOutOfBounds(
-    scaleRange[1],
-    scaleRange[0],
-    rangeMap(yStops, scaleRange, newY)
-  )
-
   // allow for interruption of enter animation
   memo.immediate = memo.immediate || Math.abs(newY - y.value) < 1
 
   set({
     y: newY,
     x: newX,
-    imgScale,
-    onFrame: () => {},
+    onFrame: null,
     immediate: memo.immediate
   })
 

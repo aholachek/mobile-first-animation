@@ -10,7 +10,6 @@ export const defaultSpringSettings = {
   x: 0,
   scaleX: 1,
   scaleY: 1,
-  imgScale: 1,
   config: {
     tension: 500,
     friction: 50
@@ -66,7 +65,6 @@ const GridImage = ({
   zIndexQueue,
   height
 }) => {
-  console.log(height)
   const [springVals, set] = useSpring(() => defaultSpringSettings)
   const [{ v }, setVelocityTracker] = useSpring(() => ({
     config: defaultSpringSettings.config,
@@ -74,11 +72,11 @@ const GridImage = ({
   }))
   const containerRef = React.useRef(null)
 
-  const { x, y, scaleX, scaleY, imgScale } = springVals
+  const { x, y, scaleX, scaleY } = springVals
 
   const bind = useDrag(
     drag({
-      unsetSelectedImage,
+      onImageDismiss: () => unsetSelectedImage(id),
       x,
       y,
       v,
@@ -97,48 +95,45 @@ const GridImage = ({
   }, [id, set, setSpring, springVals])
 
   return (
-    <StyledGridItem
-      height={height}
-      isSelected={isSelected}
-      ref={containerRef}
-      as={animated.div}
-      data-flip-key={id}
-      onTouchStart={isSelected ? bind().onTouchStart : null}
-      style={{
-        zIndex: interpolate([x, y], (x, y) => {
-          const animationInProgress = x !== 0 || y !== 0
-          if (isSelected) return 5
-          if (zIndexQueue.slice(-1)[0] === id && animationInProgress) return 5
-          if (zIndexQueue.indexOf(id) > -1 && animationInProgress) return 2
-          return ""
-        }),
-        transform: interpolate(
-          [x, y, scaleX, scaleY],
-          (x, y, scaleX, scaleY) => {
-            return `translate(${x}px, ${y}px) scaleX(${scaleX}) scaleY(${scaleY})`
-          }
-        )
-      }}
-      onClick={() => {
-        if (isSelected) return
-        return setSelectedImage({
-          parent: containerRef.current,
-          id,
-          img: containerRef.current.querySelector("img")
-        })
-      }}
-    >
-      <animated.img
-        src={img}
-        alt="landscape"
-        draggable={false}
+    <div>
+      <StyledGridItem
+        height={height}
+        isSelected={isSelected}
+        ref={containerRef}
+        as={animated.div}
+        data-flip-key={id}
+        onTouchStart={isSelected ? bind().onTouchStart : null}
         style={{
-          transform: imgScale.interpolate(imgScale => `scale(${imgScale})`)
+          zIndex: interpolate([x, y], (x, y) => {
+            const animationInProgress = x !== 0 || y !== 0
+            if (isSelected) return 5
+            if (zIndexQueue.slice(-1)[0] === id && animationInProgress) return 5
+            if (zIndexQueue.indexOf(id) > -1 && animationInProgress) return 2
+            return ""
+          }),
+          transform: interpolate(
+            [x, y, scaleX, scaleY],
+            (x, y, scaleX, scaleY) => {
+              return `translate(${x}px, ${y}px) scaleX(${scaleX}) scaleY(${scaleY})`
+            }
+          )
         }}
-      />
-    </StyledGridItem>
+        onClick={() => {
+          if (isSelected) return
+          return setSelectedImage({
+            parent: containerRef.current,
+            id,
+            img: containerRef.current.querySelector("img")
+          })
+        }}
+      >
+        <animated.img src={img} alt="landscape" draggable={false} />
+      </StyledGridItem>
+    </div>
   )
 }
+
+const MemoizedGridImage = React.memo(GridImage)
 
 const ImageGrid = ({ images, selectedImageId, ...rest }) => {
   const { height } = useWindowSize()
@@ -146,15 +141,14 @@ const ImageGrid = ({ images, selectedImageId, ...rest }) => {
     <StyledGrid>
       {images.map(({ id, img }) => {
         return (
-          <div>
-            <GridImage
-              isSelected={selectedImageId === id}
-              id={id}
-              img={img}
-              height={height}
-              {...rest}
-            />
-          </div>
+          <MemoizedGridImage
+            key={id}
+            isSelected={selectedImageId === id}
+            id={id}
+            img={img}
+            height={height}
+            {...rest}
+          />
         )
       })}
     </StyledGrid>

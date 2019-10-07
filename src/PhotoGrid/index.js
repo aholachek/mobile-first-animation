@@ -82,12 +82,12 @@ const DismissFullScreen = () => {
 
   const springsRef = React.useRef({})
 
-  const setSpring = ({ id, springVals, set }) => {
+  const setSpring = React.useCallback(({ id, springVals, set }) => {
     springsRef.current[id] = {
       springVals,
       set
     }
-  }
+  }, [])
 
   const flipRef = useRef(
     new Flipper({
@@ -147,6 +147,18 @@ const DismissFullScreen = () => {
     }
   }, [previousSelectedImage, selectedImage])
 
+  const wrappedSetSelectedImage = React.useCallback(state => {
+    flipRef.current.beforeFlip(state.id)
+    disableBodyScroll()
+    setSelectedImage(state)
+  }, [])
+
+  const wrappedUnsetSelectedImage = React.useCallback(id => {
+    flipRef.current.beforeFlip(id)
+    enableBodyScroll()
+    setSelectedImage({})
+  }, [])
+
   return (
     <StyledContainer
       flipKey={selectedImage}
@@ -157,16 +169,8 @@ const DismissFullScreen = () => {
         zIndexQueue={zIndexQueue.current}
         setSpring={setSpring}
         selectedImageId={selectedImage.id}
-        setSelectedImage={state => {
-          flipRef.current.beforeFlip(state.id)
-          disableBodyScroll()
-          setSelectedImage(state)
-        }}
-        unsetSelectedImage={() => {
-          flipRef.current.beforeFlip(selectedImage.id)
-          enableBodyScroll()
-          setSelectedImage({})
-        }}
+        setSelectedImage={wrappedSetSelectedImage}
+        unsetSelectedImage={wrappedUnsetSelectedImage}
         setBackgroundSpring={setBackgroundSpring}
         images={imageIds.map(id => imageData[id])}
       />

@@ -44,7 +44,9 @@ const Notification = ({ children, hideNotification }) => {
           y: notificationClosed ? yStops[1] : yStops[0],
           onRest: notificationClosed ? hideNotification : () => {},
           immediate: false,
-          velocity: v.lastVelocity
+          config: {
+            velocity: v.lastVelocity
+          }
         })
       }
 
