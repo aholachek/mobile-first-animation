@@ -163,7 +163,7 @@ const ApplePlaylist = () => {
         padding={drawerPadding}
         windowHeight={height}
         as={animated.div}
-        {...bind()}
+        onTouchStart={bind().onTouchStart}
         style={{
           transform: y.interpolate(y => `translate3D(0, ${y}px, 0)`)
         }}

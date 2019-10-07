@@ -103,7 +103,7 @@ const GridImage = ({
       ref={containerRef}
       as={animated.div}
       data-flip-key={id}
-      {...(isSelected ? bind() : {})}
+      onTouchStart={isSelected ? bind().onTouchStart : null}
       style={{
         zIndex: interpolate([x, y], (x, y) => {
           const animationInProgress = x !== 0 || y !== 0

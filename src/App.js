@@ -27,9 +27,11 @@ const StyledNav = styled.nav`
 
 const MessageWrapper = styled.div`
   display: none;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   padding-left: 1rem;
   padding-top: 1rem;
+  background: blue;
+  color: white;
 
   @media (min-width: 768px) {
     display: block;
@@ -39,8 +41,8 @@ const MessageWrapper = styled.div`
 const MobileWarning = () => {
   return (
     <MessageWrapper>
-      These demos should ideally be viewed on a mobile device, an emulator or
-      the mobile view in your devtools.
+      These demos should be viewed on a mobile device, an emulator or the mobile
+      view in your devtools.
     </MessageWrapper>
   )
 }

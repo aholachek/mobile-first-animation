@@ -134,7 +134,7 @@ const ListItem = ({
   return (
     <StyledListItemContainer
       ref={itemRef}
-      {...bind()}
+      onTouchStart={bind().onTouchStart}
       willTransform={willTransform}
       isBeingDeleted={isBeingDeleted}
       data-list-id={id}

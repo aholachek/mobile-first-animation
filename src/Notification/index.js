@@ -66,7 +66,7 @@ const Notification = ({ children, hideNotification }) => {
     <StyledNotificationContainer>
       <StyledNotification
         as={animated.div}
-        {...bind()}
+        onTouchStart={bind().onTouchStart}
         style={{
           opacity: y.interpolate(yStops, [1, 0]),
           transform: y.interpolate(y => `translate3D(-50%, ${y}px, 0)`)
