@@ -10,7 +10,14 @@ const maxYTranslate = 150
 export const yStops = [0, maxYTranslate]
 const xStops = [-20, 20]
 
-const drag = ({
+export const dragUnselected = ({ setSelectedImage }) => ({
+  last,
+  movement
+}) => {
+  if (last && movement[0] + movement[1] < 3) setSelectedImage()
+}
+
+export const dragSelected = ({
   onImageDismiss,
   x,
   y,
@@ -89,5 +96,3 @@ const drag = ({
 
   return memo
 }
-
-export default drag

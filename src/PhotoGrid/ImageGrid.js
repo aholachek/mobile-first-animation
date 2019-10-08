@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import styled, { css } from "styled-components"
 import { animated, useSpring, interpolate } from "react-spring"
 import { useDrag } from "react-use-gesture"
-import drag from "./drag"
+import { dragSelected, dragUnselected } from "./drag"
 import useWindowSize from "../useWindowSize"
 
 export const defaultSpringSettings = {
@@ -29,9 +29,9 @@ const StyledGrid = styled.div`
 `
 
 const StyledGridItem = styled.div`
-  overflow: hidden;
   transform-origin: 0 0;
   position: relative;
+  touch-action: manipulation;
   ${props =>
     props.isSelected
       ? css`
@@ -44,7 +44,6 @@ const StyledGridItem = styled.div`
         `
       : css`
           height: calc(33.33vw - 0.666rem);
-          touch-action: manipulation;
         `}
   > img {
     width: 100%;
@@ -73,17 +72,21 @@ const GridImage = ({
 
   const { x, y, scaleX, scaleY } = springVals
 
-  const bind = useDrag(
-    drag({
-      onImageDismiss: () => unsetSelectedImage(id),
-      x,
-      y,
-      v,
-      set,
-      setVelocityTracker,
-      setBackgroundSpring
-    })
-  )
+  const dragCallback = isSelected
+    ? dragSelected({
+        onImageDismiss: () => unsetSelectedImage(id),
+        x,
+        y,
+        v,
+        set,
+        setVelocityTracker,
+        setBackgroundSpring
+      })
+    : dragUnselected({
+        setSelectedImage: () => setSelectedImage(id)
+      })
+
+  const bind = useDrag(dragCallback)
 
   useEffect(() => {
     setSpring({
@@ -101,7 +104,7 @@ const GridImage = ({
         ref={containerRef}
         as={animated.div}
         data-flip-key={id}
-        onTouchStart={isSelected ? bind().onTouchStart : null}
+        onTouchStart={bind().onTouchStart}
         style={{
           zIndex: interpolate([x, y], (x, y) => {
             const animationInProgress = x !== 0 || y !== 0
@@ -117,12 +120,8 @@ const GridImage = ({
             }
           )
         }}
-        onClick={() => {
-          if (isSelected) return
-          return setSelectedImage(id)
-        }}
       >
-        <animated.img src={img} alt="landscape" draggable={false} />
+        <img src={img} alt="landscape" draggable={false} />
       </StyledGridItem>
     </div>
   )
