@@ -32,7 +32,6 @@ const StyledGridItem = styled.div`
   overflow: hidden;
   transform-origin: 0 0;
   position: relative;
-  will-change: transform;
   ${props =>
     props.isSelected
       ? css`
@@ -41,16 +40,16 @@ const StyledGridItem = styled.div`
           top: calc(${props.height / 2}px - 50vw);
           left: 0;
           right: 0;
-          touch-action: none;
+          touch-action: pan-x;
         `
       : css`
           height: calc(33.33vw - 0.666rem);
+          touch-action: manipulation;
         `}
   > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    ${props => (props.isSelected ? "will-change: transform" : "")};
   }
 `
 
@@ -109,22 +108,18 @@ const GridImage = ({
             if (isSelected) return 5
             if (zIndexQueue.slice(-1)[0] === id && animationInProgress) return 5
             if (zIndexQueue.indexOf(id) > -1 && animationInProgress) return 2
-            return ""
+            return 1
           }),
           transform: interpolate(
             [x, y, scaleX, scaleY],
             (x, y, scaleX, scaleY) => {
-              return `translate(${x}px, ${y}px) scaleX(${scaleX}) scaleY(${scaleY})`
+              return `translate3d(${x}px, ${y}px, 0) scaleX(${scaleX}) scaleY(${scaleY})`
             }
           )
         }}
         onClick={() => {
           if (isSelected) return
-          return setSelectedImage({
-            parent: containerRef.current,
-            id,
-            img: containerRef.current.querySelector("img")
-          })
+          return setSelectedImage(id)
         }}
       >
         <animated.img src={img} alt="landscape" draggable={false} />

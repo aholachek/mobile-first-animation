@@ -69,10 +69,7 @@ const DismissFullScreen = () => {
   const containerRef = React.useRef(null)
   const zIndexQueue = React.useRef([])
 
-  const [selectedImage, setSelectedImage] = React.useState({
-    id: undefined,
-    img: undefined
-  })
+  const [selectedImageId, setSelectedImage] = React.useState(null)
 
   const [backgroundSpring, setBackgroundSpring] = useSpring(() => {
     return {
@@ -123,52 +120,50 @@ const DismissFullScreen = () => {
     })
   )
 
-  const previousSelectedImage = usePrevious(selectedImage)
+  const previousSelectedImageId = usePrevious(selectedImageId)
 
   useLayoutEffect(() => {
-    if (!previousSelectedImage) return
-    if (previousSelectedImage.id !== selectedImage.id) {
-      if (selectedImage.id) {
-        flipRef.current.flip(selectedImage.id)
-        requestAnimationFrame(() => {
-          zIndexQueue.current.push(selectedImage.id)
-          disableBodyScroll(containerRef.current)
-        })
-      } else {
-        requestAnimationFrame(() => {
-          enableBodyScroll(containerRef.current)
-        })
-        const el = getEl(containerRef, previousSelectedImage.id)
-        el.style.transform = ""
-        flipRef.current.flip(previousSelectedImage.id, {
-          isLeaving: true
-        })
-      }
+    if (
+      previousSelectedImageId === undefined ||
+      previousSelectedImageId === selectedImageId
+    )
+      return
+    if (selectedImageId) {
+      flipRef.current.flip(selectedImageId)
+      requestAnimationFrame(() => {
+        zIndexQueue.current.push(selectedImageId)
+        disableBodyScroll(containerRef.current)
+      })
+    } else {
+      requestAnimationFrame(() => {
+        enableBodyScroll(containerRef.current)
+      })
+      const el = getEl(containerRef, previousSelectedImageId)
+      el.style.transform = ""
+      flipRef.current.flip(previousSelectedImageId, {
+        isLeaving: true
+      })
     }
-  }, [previousSelectedImage, selectedImage])
+  }, [previousSelectedImageId, selectedImageId])
 
-  const wrappedSetSelectedImage = React.useCallback(state => {
-    flipRef.current.beforeFlip(state.id)
+  const wrappedSetSelectedImage = React.useCallback(id => {
+    flipRef.current.beforeFlip(id)
     disableBodyScroll()
-    setSelectedImage(state)
+    setSelectedImage(id)
   }, [])
 
   const wrappedUnsetSelectedImage = React.useCallback(id => {
     flipRef.current.beforeFlip(id)
     enableBodyScroll()
-    setSelectedImage({})
+    setSelectedImage(null)
   }, [])
 
   return (
-    <StyledContainer
-      flipKey={selectedImage}
-      decisionData={selectedImage}
-      ref={containerRef}
-    >
+    <StyledContainer ref={containerRef}>
       <ImageGrid
         zIndexQueue={zIndexQueue.current}
         setSpring={setSpring}
-        selectedImageId={selectedImage.id}
+        selectedImageId={selectedImageId}
         setSelectedImage={wrappedSetSelectedImage}
         unsetSelectedImage={wrappedUnsetSelectedImage}
         setBackgroundSpring={setBackgroundSpring}
@@ -177,7 +172,7 @@ const DismissFullScreen = () => {
 
       <Background
         as={animated.div}
-        backgroundPointerEvents={!selectedImage.id}
+        backgroundPointerEvents={!selectedImageId}
         style={backgroundSpring}
       />
     </StyledContainer>
