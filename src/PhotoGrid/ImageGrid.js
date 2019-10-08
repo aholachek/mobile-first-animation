@@ -40,7 +40,7 @@ const StyledGridItem = styled.div`
           top: calc(${props.height / 2}px - 50vw);
           left: 0;
           right: 0;
-          touch-action: pan-x;
+          touch-action: none;
         `
       : css`
           height: calc(33.33vw - 0.666rem);
