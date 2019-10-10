@@ -65,6 +65,9 @@ export const dragSelected = ({
         }
       })
     } else {
+      setBackgroundSpring({
+        opacity: 1
+      })
       return set({
         ...baseSettings,
         y: 0,

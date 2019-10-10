@@ -5,7 +5,7 @@ import { StyledCollapseHandler } from "./styled-components"
 
 const StyledEmailList = styled.ul``
 
-const messageIds = [...new Array(30).keys()]
+const messageIds = [...new Array(80).keys()]
 
 const emails = [
   {
