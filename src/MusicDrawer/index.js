@@ -77,7 +77,15 @@ const ApplePlaylist = () => {
   const threshold = 10
 
   const bind = useDrag(
-    ({ vxvy: [, velocityY], movement: [movementX, movementY], last, memo }) => {
+    ({
+      vxvy: [, velocityY],
+      movement: [movementX, movementY],
+      last,
+      memo,
+      event
+    }) => {
+      event.preventDefault()
+
       const drawerIsOpen = y.value === stops[1]
 
       const isClick =
@@ -121,8 +129,14 @@ const ApplePlaylist = () => {
         immediate: true
       })
       return memo
+    },
+    {
+      domTarget: nowPlayingDrawerRef,
+      event: { passive: false }
     }
   )
+
+  React.useEffect(bind, [bind])
 
   const getImageTransform = () => {
     const newWidth = (2 * width) / 3
@@ -149,7 +163,6 @@ const ApplePlaylist = () => {
         padding={drawerPadding}
         windowHeight={height}
         as={animated.div}
-        onTouchStart={bind().onTouchStart}
         style={{
           transform: y.interpolate(y => `translate3D(0, ${y}px, 0)`)
         }}
