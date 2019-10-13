@@ -6,7 +6,7 @@ export const StyledNotification = styled.div`
   left: 50%;
   transform: translateX(-50%);
   border-radius: 8px;
-  padding: .5rem 2rem .5rem 2rem;
+  padding: 0.5rem 2rem 0.5rem 2rem;
   background-color: #171226;
   color: white;
   box-shadow: 0 0 0 1px transparent, 0 3px 10px #00000026;
@@ -14,11 +14,12 @@ export const StyledNotification = styled.div`
   min-width: 70vw;
   pointer-events: all;
   font-size: 1.2rem;
-  display:flex;
+  display: flex;
   align-items: center;
+  touch-action: none;
   > div:first-of-type {
     font-size: 2rem;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 `
 

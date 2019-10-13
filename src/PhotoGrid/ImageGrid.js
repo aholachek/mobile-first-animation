@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import styled, { css } from "styled-components"
 import { animated, useSpring, interpolate } from "react-spring"
+import useVelocityTrackedSpring from "../useVelocityTrackedSpring"
 import { useDrag } from "react-use-gesture"
 import { dragSelected, dragUnselected } from "./drag"
 import useWindowSize from "../useWindowSize"
@@ -63,23 +64,33 @@ const GridImage = ({
   zIndexQueue,
   height
 }) => {
-  const [springVals, set] = useSpring(() => defaultSpringSettings)
-  const [{ v }, setVelocityTracker] = useSpring(() => ({
-    config: defaultSpringSettings.config,
-    v: 0
+  const [{ y }, setY] = useVelocityTrackedSpring(() => ({
+    y: 0
   }))
+
+  const [{ x }, setX] = useSpring(() => ({
+    x: 0
+  }))
+
+  const [{ scaleX, scaleY }, setScale] = useSpring(() => ({
+    scaleX: 1,
+    scaleY: 1
+  }))
+
   const containerRef = React.useRef(null)
 
-  const { x, y, scaleX, scaleY } = springVals
+  const set = args => {
+    if (args.y !== undefined) setY(args)
+    if (args.x !== undefined) setX(args)
+    if (args.scaleX !== undefined) setScale(args)
+  }
 
   const dragCallback = isSelected
     ? dragSelected({
         onImageDismiss: () => unsetSelectedImage(id),
         x,
         y,
-        v,
         set,
-        setVelocityTracker,
         setBackgroundSpring
       })
     : dragUnselected({
@@ -91,10 +102,16 @@ const GridImage = ({
   useEffect(() => {
     setSpring({
       id,
-      springVals,
+      springVals: {
+        x,
+        y,
+        scaleX,
+        scaleY
+      },
       set
     })
-  }, [id, set, setSpring, springVals])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div>

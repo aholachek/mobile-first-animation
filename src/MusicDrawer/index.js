@@ -1,6 +1,7 @@
 import React, { useRef } from "react"
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock"
-import { animated, useSpring } from "react-spring"
+import { animated } from "react-spring"
+import useVelocityTrackedSpring from "../useVelocityTrackedSpring"
 import {
   Container,
   PlaylistDrawer,
@@ -60,12 +61,7 @@ const ApplePlaylist = () => {
     friction: 33
   }
 
-  const [{ v }, setVelocityTracker] = useSpring(() => ({
-    v: 0,
-    config: spring
-  }))
-
-  const [{ y }, set] = useSpring(() => ({
+  const [{ y }, set] = useVelocityTrackedSpring(() => ({
     y: 0,
     config: spring
   }))
@@ -76,18 +72,14 @@ const ApplePlaylist = () => {
       config: dampedSpring,
       immediate: false
     })
-    setVelocityTracker({
-      v: stops[1],
-      config: dampedSpring
-    })
   }
-
-  const drawerIsOpen = y.value === stops[1]
 
   const threshold = 10
 
   const bind = useDrag(
     ({ vxvy: [, velocityY], movement: [movementX, movementY], last, memo }) => {
+      const drawerIsOpen = y.value === stops[1]
+
       const isClick =
         last && Math.abs(movementX) + Math.abs(movementY) <= 3 && !drawerIsOpen
 
@@ -113,10 +105,7 @@ const ApplePlaylist = () => {
         return set({
           y: point,
           immediate: false,
-          config: {
-            velocity: v.lastVelocity,
-            ...spring
-          }
+          config: spring
         })
       }
 
@@ -126,10 +115,7 @@ const ApplePlaylist = () => {
         movementY + memo,
         0.1
       )
-      setVelocityTracker({
-        v: newY,
-        config: spring
-      })
+
       set({
         y: newY,
         immediate: true

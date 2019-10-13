@@ -1,7 +1,9 @@
 import React, { useEffect } from "react"
 
-import { animated, useSpring } from "react-spring"
+import { animated } from "react-spring"
 import { useDrag } from "react-use-gesture"
+import useVelocityTrackedSpring from "../useVelocityTrackedSpring"
+
 import {
   StyledNotification,
   StyledNotificationContainer,
@@ -13,16 +15,11 @@ const yStops = [0, 100]
 const threshold = 10
 
 const Notification = ({ children, hideNotification }) => {
-  const [{ y }, set] = useSpring(() => ({ y: yStops[1] }))
-
-  const [{ v }, setVelocityTracker] = useSpring(() => ({
-    v: yStops[1]
-  }))
+  const [{ y }, set] = useVelocityTrackedSpring(() => ({ y: yStops[1] }))
 
   useEffect(() => {
     set({ y: 0 })
-    setVelocityTracker({ velocityTracker: 0 })
-  }, [set, setVelocityTracker])
+  }, [set])
 
   const bind = useDrag(
     ({ last, movement: [, movementY], vxvy: [, velocityY], memo }) => {
@@ -43,18 +40,12 @@ const Notification = ({ children, hideNotification }) => {
         return set({
           y: notificationClosed ? yStops[1] : yStops[0],
           onRest: notificationClosed ? hideNotification : () => {},
-          immediate: false,
-          config: {
-            velocity: v.lastVelocity
-          }
+          immediate: false
         })
       }
 
       const newY = clamp(yStops[0], yStops[1], memo + movementY)
 
-      setVelocityTracker({
-        v: newY
-      })
       set({
         y: newY,
         immediate: true

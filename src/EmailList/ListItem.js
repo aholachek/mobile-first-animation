@@ -6,7 +6,8 @@ import {
   StyledEmail,
   StyledAvatar
 } from "./styled-components"
-import { animated, useSpring } from "react-spring"
+import { animated } from "react-spring"
+import useVelocityTrackedSpring from "../useVelocityTrackedSpring"
 import { useDrag } from "react-use-gesture"
 import {
   rubberBandIfOutOfBounds,
@@ -41,13 +42,8 @@ const ListItem = ({
     stops.current = [0, actionsOpen, -itemRef.current.clientWidth]
   }, [])
 
-  const [{ x }, set] = useSpring(() => ({
+  const [{ x }, set] = useVelocityTrackedSpring(() => ({
     x: 0
-  }))
-
-  const [{ v }, setVelocityTracker] = useSpring(() => ({
-    v: 0,
-    config: spring
   }))
 
   const calculateDeleteButtonTransforms = x => {
@@ -112,17 +108,12 @@ const ListItem = ({
         )
       }
 
-      setVelocityTracker({
-        v: newX
-      })
-
       set({
         x: newX,
         immediate: !last,
         onRest,
         config: {
           ...spring,
-          velocity: last ? v.lastVelocity : undefined,
           clamp: last
         }
       })

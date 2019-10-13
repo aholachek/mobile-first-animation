@@ -14,16 +14,16 @@ export const dragUnselected = ({ setSelectedImage }) => ({
   last,
   movement
 }) => {
-  if (last && movement[0] + movement[1] < 3) setSelectedImage()
+  if (last && Math.abs(movement[0]) + Math.abs(movement[1]) < 2) {
+    setSelectedImage()
+  }
 }
 
 export const dragSelected = ({
   onImageDismiss,
   x,
   y,
-  v,
   set,
-  setVelocityTracker,
   setBackgroundSpring
 }) => ({
   vxvy: [, velocityY],
@@ -44,16 +44,9 @@ export const dragSelected = ({
     const projectedEndpoint = y.value + projection(velocityY, "fast")
     const point = findNearestNumberInArray(projectedEndpoint, yStops)
 
-    const baseSettings = {
-      immediate: false,
-      config: {
-        velocity: v.lastVelocity
-      }
-    }
-
     if (point === yStops[1]) {
       return set({
-        ...baseSettings,
+        immediate: false,
         y: point,
         onFrame: () => {
           if (Math.abs(y.lastVelocity) < 1500) {
@@ -69,7 +62,7 @@ export const dragSelected = ({
         opacity: 1
       })
       return set({
-        ...baseSettings,
+        immediate: false,
         y: 0,
         x: 0
       })
@@ -87,10 +80,6 @@ export const dragSelected = ({
     x: newX,
     onFrame: null,
     immediate: memo.immediate
-  })
-
-  setVelocityTracker({
-    v: newY
   })
 
   setBackgroundSpring({
