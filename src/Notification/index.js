@@ -9,7 +9,11 @@ import {
   StyledNotificationContainer,
   StyledContainer
 } from "./styled-components"
-import { findNearestNumberInArray, projection, rubberBandIfOutOfBounds } from "../utilities"
+import {
+  findNearestNumberInArray,
+  projection,
+  rubberBandIfOutOfBounds
+} from "../utilities"
 
 const yStops = [0, 120]
 const threshold = 10
@@ -23,7 +27,6 @@ const Notification = ({ children, hideNotification }) => {
 
   const bind = useDrag(
     ({ last, movement: [, movementY], vxvy: [, velocityY], memo }) => {
-
       if (!memo) {
         const isIntentionalGesture = Math.abs(movementY) > threshold
         if (!isIntentionalGesture) return
@@ -43,7 +46,11 @@ const Notification = ({ children, hideNotification }) => {
         })
       }
 
-      const newY = rubberBandIfOutOfBounds(yStops[0], yStops[1], memo + movementY)
+      const newY = rubberBandIfOutOfBounds(
+        yStops[0],
+        yStops[1],
+        memo + movementY
+      )
 
       set({
         y: newY,
