@@ -5,6 +5,7 @@ import ImageGrid, { defaultSpringSettings, bounceConfig } from "./ImageGrid"
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock"
 import images from "../assets/index"
 import usePrevious from "../usePrevious"
+import Flipper from "../Flipper"
 
 const Background = styled.div`
   position: absolute;
@@ -34,37 +35,6 @@ const imageData = images
 
 const imageIds = Object.keys(imageData)
 
-const getEl = (ref, id) => ref.current.querySelector(`[data-flip-key=${id}]`)
-
-class Flipper {
-  constructor({ ref, onFlip }) {
-    this.ref = ref
-    this.onFlip = onFlip
-    this.positions = {}
-  }
-  measure(id) {
-    const el = getEl(this.ref, id)
-    if (el) return el.getBoundingClientRect()
-  }
-
-  beforeFlip(id) {
-    this.positions[id] = this.measure(id)
-  }
-
-  flip(id, data) {
-    const after = this.measure(id, true)
-    const before = this.positions[id]
-    const diff = {
-      scaleX: before.width / after.width,
-      scaleY: before.height / after.height,
-      x: before.left - after.left,
-      y: before.top - after.top
-    }
-
-    this.onFlip(id, diff, data)
-  }
-}
-
 const DismissFullScreen = () => {
   const containerRef = React.useRef(null)
   const zIndexQueue = React.useRef([])
@@ -91,9 +61,7 @@ const DismissFullScreen = () => {
       ref: containerRef,
       onFlip(id, vals, data = {}) {
         const set = springsRef.current[id].set
-
-        const el = getEl(containerRef, id)
-        el.style.transform = `translate(${vals.x}px, ${vals.y}px) scaleX(${vals.scaleX}) scaleY(${vals.scaleY})`
+        const el = this.getEl(id)
         el.style.zIndex = 5
         set({
           ...vals,
@@ -138,8 +106,6 @@ const DismissFullScreen = () => {
       requestAnimationFrame(() => {
         enableBodyScroll(containerRef.current)
       })
-      const el = getEl(containerRef, previousSelectedImageId)
-      el.style.transform = ""
       flipRef.current.flip(previousSelectedImageId, {
         isLeaving: true
       })
