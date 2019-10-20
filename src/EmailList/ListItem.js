@@ -78,7 +78,7 @@ const ListItem = ({
           if (!willTransform) setWillTransform(true)
           return
         }
-        memo = x.value + (movementX < 0 ? threshold : -threshold)
+        memo = x.value - movementX
       }
 
       // hack

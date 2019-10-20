@@ -35,8 +35,8 @@ export const dragSelected = ({
     const isIntentionalGesture = Math.abs(movementY) > threshold
     if (!isIntentionalGesture) return
     memo = {
-      y: y.value + (movementY < 0 ? threshold : -threshold),
-      x: x.value + (movementX < 0 ? movementX : -movementX)
+      y: y.value - movementY,
+      x: x.value - movementX
     }
   }
 

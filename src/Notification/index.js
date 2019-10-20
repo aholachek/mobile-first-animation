@@ -23,12 +23,13 @@ const Notification = ({ children, hideNotification }) => {
 
   const bind = useDrag(
     ({ last, movement: [, movementY], vxvy: [, velocityY], memo }) => {
+
       if (!memo) {
         const isIntentionalGesture = Math.abs(movementY) > threshold
         if (!isIntentionalGesture) {
           return
         }
-        memo = y.value + (movementY < 0 ? threshold : -threshold)
+        memo = y.value - movementY
       }
 
       if (last) {

@@ -93,13 +93,17 @@ const ApplePlaylist = () => {
 
       if (isClick) return setDrawerOpen()
 
-      const isIntentionalGesture = Math.abs(movementY) > threshold
-
-      if (!isIntentionalGesture) return
-
       if (!memo) {
+
+        const isIntentionalGesture =
+          Math.abs(movementY) > threshold &&
+          Math.abs(movementY) > Math.abs(movementX)
+
+        if (!isIntentionalGesture) return
+
         disableBodyScroll(nowPlayingDrawerRef.current)
-        memo = y.value + (movementY < threshold ? threshold : -threshold)
+        memo = y.value - movementY
+        
       }
 
       if (last) {
