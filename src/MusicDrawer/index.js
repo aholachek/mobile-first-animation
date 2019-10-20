@@ -93,9 +93,7 @@ const ApplePlaylist = () => {
 
       if (isClick) return setDrawerOpen()
 
-      const isIntentionalGesture =
-        Math.abs(movementY) > threshold &&
-        Math.abs(movementY) > Math.abs(movementX)
+      const isIntentionalGesture = Math.abs(movementY) > threshold
 
       if (!isIntentionalGesture) return
 
