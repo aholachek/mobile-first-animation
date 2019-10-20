@@ -9,9 +9,9 @@ import {
   StyledNotificationContainer,
   StyledContainer
 } from "./styled-components"
-import { findNearestNumberInArray, projection, clamp } from "../utilities"
+import { findNearestNumberInArray, projection, rubberBandIfOutOfBounds } from "../utilities"
 
-const yStops = [0, 100]
+const yStops = [0, 120]
 const threshold = 10
 
 const Notification = ({ children, hideNotification }) => {
@@ -26,9 +26,7 @@ const Notification = ({ children, hideNotification }) => {
 
       if (!memo) {
         const isIntentionalGesture = Math.abs(movementY) > threshold
-        if (!isIntentionalGesture) {
-          return
-        }
+        if (!isIntentionalGesture) return
         memo = y.value - movementY
       }
 
@@ -45,7 +43,7 @@ const Notification = ({ children, hideNotification }) => {
         })
       }
 
-      const newY = clamp(yStops[0], yStops[1], memo + movementY)
+      const newY = rubberBandIfOutOfBounds(yStops[0], yStops[1], memo + movementY)
 
       set({
         y: newY,
