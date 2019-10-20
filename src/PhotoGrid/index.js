@@ -79,10 +79,13 @@ const DismissFullScreen = () => {
             config: data.isLeaving ? bounceConfig : defaultSpringSettings.config
           }
 
-          set({
-            ...springSettings,
-            immediate: false
-          })
+          set(
+            {
+              ...springSettings,
+              immediate: false
+            },
+            { skipSetVelocity: true }
+          )
         })
       }
     })

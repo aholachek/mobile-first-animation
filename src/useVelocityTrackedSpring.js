@@ -6,7 +6,7 @@ const getTrackedVar = (_trackedVar, initialConfig) => {
   const hasY = initialConfig.y !== undefined
   if ((hasX && hasY) || (!hasX && !hasY)) {
     throw new Error(
-      "can't automatically detect which variable to track, so you need to specify which variable should be tracked for velocity"
+      "[useVelocityTrackedSpring] can't automatically detect which variable to track, so you need to specify which variable should be tracked in the second argument"
     )
   }
   return hasX ? "x" : "y"
@@ -21,8 +21,8 @@ const useVelocityTrackedSpring = (initialConfigFunc, _trackedVar) => {
     ...initialConfig
   }))
 
-  const wrappedSet = data => {
-    if (data[trackedVar] !== undefined && !data.skipVelocityTracker) {
+  const wrappedSet = (data, { skipTrackVelocity, skipSetVelocity } = {}) => {
+    if (data[trackedVar] !== undefined && !skipTrackVelocity) {
       setVelocityTracker({
         velocityTracker: data[trackedVar],
         config: data.config
@@ -34,7 +34,7 @@ const useVelocityTrackedSpring = (initialConfigFunc, _trackedVar) => {
       ...data,
       config: {
         ...data.config,
-        velocity: velocityTracker.lastVelocity
+        velocity: !skipSetVelocity && velocityTracker.lastVelocity
       }
     })
   }
