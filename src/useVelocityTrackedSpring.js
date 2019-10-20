@@ -1,5 +1,12 @@
 import { useSpring } from "react-spring"
 
+/**
+ * Use this wrapper hook instead of useSpring from react-spring
+ * to make sure that your spring animations have velocity,
+ * even when parts of the animation have been delegated to other means of control
+ * (e.g. gestures)
+ */
+
 const getTrackedVar = (_trackedVar, initialConfig) => {
   if (_trackedVar) return _trackedVar
   const hasX = initialConfig.x !== undefined
@@ -21,6 +28,7 @@ const useVelocityTrackedSpring = (initialConfigFunc, _trackedVar) => {
     ...initialConfig
   }))
 
+  // you can disable the tracking or setting of velocity by providing options in the second argument
   const wrappedSet = (data, { skipTrackVelocity, skipSetVelocity } = {}) => {
     if (data[trackedVar] !== undefined && !skipTrackVelocity) {
       setVelocityTracker({
@@ -30,6 +38,7 @@ const useVelocityTrackedSpring = (initialConfigFunc, _trackedVar) => {
     }
 
     if (data.immediate) return set(data)
+
     set({
       ...data,
       config: {
