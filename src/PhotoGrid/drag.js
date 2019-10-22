@@ -49,7 +49,7 @@ export const dragSelected = ({
         immediate: false,
         y: point,
         onFrame: () => {
-          if (Math.abs(y.lastVelocity) < 1500) {
+          if (Math.abs(y.lastVelocity) < 1000) {
             onImageDismiss()
             set({
               onFrame: null

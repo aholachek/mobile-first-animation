@@ -30,15 +30,14 @@ const useVelocityTrackedSpring = (initialConfigFunc, _trackedVar) => {
 
   // you can disable the tracking or setting of velocity by providing options in the second argument
   const wrappedSet = (data, { skipTrackVelocity, skipSetVelocity } = {}) => {
-    if (data[trackedVar] !== undefined && !skipTrackVelocity) {
-      setVelocityTracker({
-        velocityTracker: data[trackedVar],
-        config: data.config
-      })
-    }
+    // update velocity tracker
+    const velocityTrackerArgs = { config: data.config }
+    if (data[trackedVar] && !skipTrackVelocity)
+      velocityTrackerArgs.velocityTracker = data[trackedVar]
+    setVelocityTracker(velocityTrackerArgs)
 
+    // update actual spring
     if (data.immediate) return set(data)
-
     set({
       ...data,
       config: {
