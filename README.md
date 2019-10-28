@@ -1,7 +1,8 @@
 # Mobile First Animation in React
 
+<a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
 <img src="./demos/music-drawer.gif" alt="an animated drawer inspired by the Apple Music app" style="display:inline-block;margin:1rem 0;">
-
+</a>
 
 [View this repo as a live demo in CodeSandbox](https://codesandbox.io/s/github/aholachek/mobile-first-animation).
 
