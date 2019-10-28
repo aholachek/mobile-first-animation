@@ -13,13 +13,22 @@
 <br/>
 <br/>
 
+[View this repo as a live demo in CodeSandbox.](https://codesandbox.io/s/github/aholachek/mobile-first-animation)
+
+
+### Talk
 This repo contains the source code of the demos for [this talk about mobile animation in React](https://www.youtube.com/watch?v=JDDxR1a15Yo&feature=youtu.be&t=10664).
 
 [The interactive slides for the talk can be found here.](http://mobile-first-animation.netlify.com)
 
-You can also play with the [spring demo from the talk here.](https://spring-playground.netlify.com/)
+### Spring Playground
 
-[View this repo as a live demo in CodeSandbox.](https://codesandbox.io/s/github/aholachek/mobile-first-animation)
+<a href="https://spring-playground.netlify.com/">
+<img src="./demos/spring-demo.png" width="400px">
+</a>
+
+You can play with the [spring demo from the talk here.](https://spring-playground.netlify.com/)
+
 
 ### Notes:
 
