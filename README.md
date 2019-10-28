@@ -1,11 +1,7 @@
 # Mobile First Animation in React
 
-<div>
-<img src="./demos/music-drawer.gif"  style="display:inline-block;margin-right:2rem;height: 350px;">
-<img src="./demos/list-items.gif" style="display:inline-block;margin-right:2rem;height: 350px;">
-<img src="./demos/image-grid.gif" style="height: 350px;">
+<img src="./demos/music-drawer.gif" alt="an animated drawer inspired by the Apple Music app" style="display:inline-block;margin:1rem 0;">
 
-</div>
 
 [View this repo as a live demo in CodeSandbox](https://codesandbox.io/s/github/aholachek/mobile-first-animation).
 
