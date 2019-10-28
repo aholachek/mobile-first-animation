@@ -21,7 +21,7 @@ This repo contains the source code of the demos for [this talk about mobile anim
 
 [The interactive slides for the talk can be found here.](http://mobile-first-animation.netlify.com)
 
-### Spring Playground
+### Springs Demo
 
 <a href="https://spring-playground.netlify.com/">
 <img src="./demos/spring-demo.png" width="400px">
