@@ -1,11 +1,12 @@
 # Mobile First Animation in React
 
+<div align="center">
 <a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
-<img src="./demos/music-drawer-2.gif" alt="an animated drawer inspired by the Apple Music app" style="display:inline-block;margin-right:4rem;">
-<img src="./demos/image-grid.gif" alt="animated grid of images" style="display:inline-block;margin-right:4rem;">
-<img src="./demos/list-items-new.gif" alt="dismissable email list" style="display:inline-block">
+<img src="./demos/music-drawer-2.gif" alt="an animated drawer inspired by the Apple Music app" >
+<img src="./demos/image-grid.gif" alt="animated grid of images" >
+<img src="./demos/list-items-new.gif" alt="dismissable email list">
 </a>
-
+</div>
 
 This repo contains the source code of the demos for [this talk about mobile animation in React](https://www.youtube.com/watch?v=JDDxR1a15Yo&feature=youtu.be&t=10664).
 
