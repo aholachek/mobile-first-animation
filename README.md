@@ -1,12 +1,14 @@
 # Mobile First Animation in React
 
-<div align="center">
 <a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
 <img src="./demos/music-drawer-2.gif" alt="an animated drawer inspired by the Apple Music app" >
+</a>
+<a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
 <img src="./demos/image-grid.gif" alt="animated grid of images" >
+</a>
+<a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
 <img src="./demos/list-items-new.gif" alt="dismissable email list">
 </a>
-</div>
 
 <br/>
 
