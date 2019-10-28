@@ -1,13 +1,16 @@
 # Mobile First Animation in React
 
 <a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
-<img src="./demos/music-drawer-android.gif" alt="an animated drawer inspired by the Apple Music app" >
+<img src="./demos/tabs.gif" alt="swipeable tabs" height="350px">
 </a>
 <a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
-<img src="./demos/image-grid-android.gif" alt="animated grid of images" >
+<img src="./demos/music-drawer-android.gif" alt="an animated drawer inspired by the Apple Music app" height="350px">
 </a>
 <a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
-<img src="./demos/email-list-android.gif" alt="dismissable email list">
+<img src="./demos/image-grid-android.gif" alt="animated grid of images" height="350px">
+</a>
+<a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
+<img src="./demos/email-list-android.gif" alt="dismissable email list" height="350px">
 </a>
 
 <br/>
@@ -15,8 +18,8 @@
 
 [View this repo as a live demo in CodeSandbox.](https://codesandbox.io/s/github/aholachek/mobile-first-animation)
 
-
 ### React Conf 2019 Talk
+
 This repo contains the source code of the demos for [this talk about mobile animation](https://www.youtube.com/watch?v=JDDxR1a15Yo&feature=youtu.be&t=10664).
 
 [The interactive slides for the talk can be found here.](http://mobile-first-animation.netlify.com)
@@ -28,7 +31,6 @@ This repo contains the source code of the demos for [this talk about mobile anim
 </a>
 
 You can play with the [spring demo from the talk here.](https://spring-playground.netlify.com/)
-
 
 ### Notes:
 

@@ -43,7 +43,7 @@ const tabIcons = [LikeIcon, PlaylistIcon, RadioIcon, SearchIcon, SongIcon]
 
 const drawerHeight = 160
 const nowPlayingImageDimensions = 70
-const drawerPadding = 20
+const drawerPadding = 16
 
 const ApplePlaylist = () => {
   const { width, height } = useWindowSize()
@@ -94,16 +94,13 @@ const ApplePlaylist = () => {
       if (isClick) return setDrawerOpen()
 
       if (!memo) {
-
         const isIntentionalGesture =
           Math.abs(movementY) > threshold &&
           Math.abs(movementY) > Math.abs(movementX)
 
         if (!isIntentionalGesture) return
-
         disableBodyScroll(nowPlayingDrawerRef.current)
         memo = y.value - movementY
-        
       }
 
       if (last) {
@@ -123,7 +120,7 @@ const ApplePlaylist = () => {
         stops[stops.length - 1],
         stops[0],
         movementY + memo,
-        0.1
+        0.08
       )
 
       set({

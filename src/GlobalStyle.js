@@ -99,11 +99,11 @@ b {
 }
 
 h1,h2,h3,h4 {
-  font-family: 'Source Serif Pro'
+  font-family: 'Source Serif Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 code {
-  font-family: 'Source Code Pro'
+  font-family: 'Source Code Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 
