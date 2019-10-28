@@ -16,8 +16,8 @@
 [View this repo as a live demo in CodeSandbox.](https://codesandbox.io/s/github/aholachek/mobile-first-animation)
 
 
-### Talk
-This repo contains the source code of the demos for [this talk about mobile animation at React Conf 2019](https://www.youtube.com/watch?v=JDDxR1a15Yo&feature=youtu.be&t=10664).
+### React Conf 2019 Talk
+This repo contains the source code of the demos for [this talk about mobile animation](https://www.youtube.com/watch?v=JDDxR1a15Yo&feature=youtu.be&t=10664).
 
 [The interactive slides for the talk can be found here.](http://mobile-first-animation.netlify.com)
 
