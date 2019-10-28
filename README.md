@@ -3,7 +3,7 @@
 <a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
 <img src="./demos/music-drawer.gif" alt="an animated drawer inspired by the Apple Music app" style="display:inline-block;margin-right:4rem;">
 <img src="./demos/image-grid.gif" alt="animated grid of images" style="display:inline-block;margin-right:4rem;">
-<img src="./demos/list-items.gif" alt="dismissable email list" style="display:inline-block">
+<img src="./demos/list-items-new.gif" alt="dismissable email list" style="display:inline-block">
 </a>
 
 
