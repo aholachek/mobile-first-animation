@@ -1,11 +1,19 @@
-// 0 < percent < 1
+// percent should be between 0 and 1
 export const range = (start, end, percent) => (end - start) * percent + start
 
 export const clamp = (min, max, val) => Math.max(Math.min(val, max), min)
 
+// take a number ("val") in between the two numbers in arr1, and map it to a number in between the two numbers in arr2
 export const rangeMap = (arr1, arr2, val) => {
   const percent = (val - arr1[0]) / (arr1[1] - arr1[0])
   return range(arr2[0], arr2[1], percent)
+}
+
+// rangeMap with a guarantee that the returned number will be inside the bounds of arr2
+export const clampedRangeMap = (arr1, arr2, val) => {
+  const min = arr2[0] < arr2[1] ? arr2[0] : arr2[1]
+  const max = min === arr2[0] ? arr2[1] : arr2[0]
+  return clamp(min, max, rangeMap(arr1, arr2, val))
 }
 
 // https://twitter.com/chpwn/status/285540192096497664

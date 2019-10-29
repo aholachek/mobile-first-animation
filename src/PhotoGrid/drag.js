@@ -2,13 +2,15 @@ import {
   rubberBandIfOutOfBounds,
   findNearestNumberInArray,
   projection,
-  rangeMap
+  rangeMap,
+  clampedRangeMap
 } from "../utilities"
 
 const threshold = 10
 const maxYTranslate = 150
 export const yStops = [0, maxYTranslate]
 const xStops = [-20, 20]
+const scaleStops = [1, 0.75]
 
 export const dragUnselected = ({ setSelectedImage }) => ({
   last,
@@ -24,7 +26,8 @@ export const dragSelected = ({
   x,
   y,
   set,
-  setBackgroundSpring
+  setBackgroundSpring,
+  width
 }) => ({
   vxvy: [, velocityY],
   movement: [movementX, movementY],
@@ -64,20 +67,26 @@ export const dragSelected = ({
       return set({
         immediate: false,
         y: 0,
-        x: 0
+        x: 0,
+        scaleY: 1,
+        scaleX: 1
       })
     }
   }
 
-  const newY = rubberBandIfOutOfBounds(yStops[0], yStops[1], movementY + memo.y)
-  const newX = rubberBandIfOutOfBounds(xStops[0], xStops[1], movementX + memo.x)
+  const newY = rubberBandIfOutOfBounds(...yStops, movementY + memo.y)
+  const newX = rubberBandIfOutOfBounds(...xStops, movementX + memo.x)
 
   // allow for interruption of enter animation
   memo.immediate = memo.immediate || Math.abs(newY - y.value) < 1
 
+  const scale = clampedRangeMap(yStops, scaleStops, movementY + memo.y)
+
   set({
     y: newY,
-    x: newX,
+    x: newX + ((1 - scale) / 2) * width,
+    scaleY: scale,
+    scaleX: scale,
     onFrame: null,
     immediate: memo.immediate
   })

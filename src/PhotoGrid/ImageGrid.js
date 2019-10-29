@@ -62,7 +62,8 @@ const GridImage = ({
   isSelected,
   setBackgroundSpring,
   zIndexQueue,
-  height
+  height,
+  width
 }) => {
   const [{ y }, setY] = useVelocityTrackedSpring(() => ({
     y: 0
@@ -91,7 +92,8 @@ const GridImage = ({
         x,
         y,
         set,
-        setBackgroundSpring
+        setBackgroundSpring,
+        width
       })
     : dragUnselected({
         setSelectedImage: () => setSelectedImage(id)
@@ -147,7 +149,7 @@ const GridImage = ({
 const MemoizedGridImage = React.memo(GridImage)
 
 const ImageGrid = ({ images, selectedImageId, ...rest }) => {
-  const { height } = useWindowSize()
+  const { height, width } = useWindowSize()
   return (
     <StyledGrid>
       {images.map(({ id, img }) => {
@@ -158,6 +160,7 @@ const ImageGrid = ({ images, selectedImageId, ...rest }) => {
             id={id}
             img={img}
             height={height}
+            width={width}
             {...rest}
           />
         )
