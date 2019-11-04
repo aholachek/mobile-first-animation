@@ -1,12 +1,12 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import styled from "styled-components";
-import GlobalStyle from "./GlobalStyle";
-import SwipeableTabs from "./SwipeableTabs";
-import EmailList from "./EmailList";
-import MusicDrawer from "./MusicDrawer";
-import PhotoGrid from "./PhotoGrid";
-import Notification from "./Notification";
+import React from "react"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import styled from "styled-components"
+import GlobalStyle from "./GlobalStyle"
+import SwipeableTabs from "./SwipeableTabs"
+import EmailList from "./EmailList"
+import MusicDrawer from "./MusicDrawer"
+import PhotoGrid from "./PhotoGrid"
+import Notification from "./Notification"
 
 const StyledNav = styled.nav`
   padding: 1.5rem;
@@ -23,7 +23,7 @@ const StyledNav = styled.nav`
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
   }
-`;
+`
 
 const MessageWrapper = styled.div`
   display: none;
@@ -36,7 +36,7 @@ const MessageWrapper = styled.div`
   @media (min-width: 768px) {
     display: block;
   }
-`;
+`
 
 const MobileWarning = () => {
   return (
@@ -44,8 +44,8 @@ const MobileWarning = () => {
       These demos should be viewed on a mobile device, an emulator or the mobile
       view in your devtools.
     </MessageWrapper>
-  );
-};
+  )
+}
 
 const routes = [
   { path: "/email-list", component: EmailList, title: "Email List" },
@@ -57,7 +57,7 @@ const routes = [
   },
   { path: "/photo-grid", component: PhotoGrid, title: "Photo Grid" },
   { path: "/notification", component: Notification, title: "Notification" }
-];
+]
 
 function App() {
   return (
@@ -81,21 +81,21 @@ function App() {
                     ))}
                   </ul>
                 </StyledNav>
-              );
+              )
             }}
           />
           {routes.map(r => {
-            const Component = r.component;
+            const Component = r.component
             return (
               <Route path={r.path} key={r.path}>
                 <Component />
               </Route>
-            );
+            )
           })}
         </Switch>
       </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
