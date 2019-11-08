@@ -36,4 +36,4 @@ You can play with the [spring demo from the talk here.](https://spring-playgroun
 
 - If you find any bugs or UI inconsistencies, please make an issue!
 - These are animation demos and as such they are not production-ready UI code. They are not fully accessible, and don't have desktop variants.
-- Adhering to animation best practices can ensure that animations perform acceptably on newer "average", sub-$200 devices. However, there are some devices (older or very inexpensive phones) that willbe unlikely to achieve minimally acceptable animation performance. Make sure to test your animations on the phones of your target audience before committing to add them.
+- Adhering to animation best practices can ensure that animations perform acceptably on newer "average", sub-$200 devices. However, there are some devices (older or very inexpensive phones) that will have difficulties achieving minimally acceptable animation performance. Make sure to test your animations on the phones of your target audience before committing to add them.
