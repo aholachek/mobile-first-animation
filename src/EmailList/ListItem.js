@@ -109,9 +109,9 @@ const ListItem = ({
 
       return memo
     }, {
-      // axis: 'x',
-     // filterClicks: true,
-      // threshold,
+      axis: 'x',
+     filterClicks: true,
+      threshold,
     }
   )
 
