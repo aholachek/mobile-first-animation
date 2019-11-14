@@ -38,13 +38,13 @@ export const dragSelected = ({
     const isIntentionalGesture = Math.abs(movementY) > threshold
     if (!isIntentionalGesture) return
     memo = {
-      y: y.value - movementY,
-      x: x.value - movementX
+      y: y.get() - movementY,
+      x: x.get() - movementX
     }
   }
 
   if (last) {
-    const projectedEndpoint = y.value + projection(velocityY, "fast")
+    const projectedEndpoint = y.get() + projection(velocityY, "fast")
     const point = findNearestNumberInArray(projectedEndpoint, yStops)
 
     if (point === yStops[1]) {
@@ -78,7 +78,7 @@ export const dragSelected = ({
   const newX = rubberBandIfOutOfBounds(...xStops, movementX + memo.x)
 
   // allow for interruption of enter animation
-  memo.immediate = memo.immediate || Math.abs(newY - y.value) < 1
+  memo.immediate = memo.immediate || Math.abs(newY - y.get()) < 1
 
   const scale = clampedRangeMap(yStops, scaleStops, movementY + memo.y)
 

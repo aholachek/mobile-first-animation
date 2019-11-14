@@ -6,8 +6,7 @@ import {
   StyledEmail,
   StyledAvatar
 } from "./styled-components"
-import { animated } from "react-spring"
-import useVelocityTrackedSpring from "../useVelocityTrackedSpring"
+import { animated, useSpring } from "react-spring"
 import { useDrag } from "react-use-gesture"
 import {
   rubberBandIfOutOfBounds,
@@ -42,7 +41,7 @@ const ListItem = ({
     stops.current = [0, actionsOpen, -itemRef.current.clientWidth]
   }, [])
 
-  const [{ x }, set] = useVelocityTrackedSpring(() => ({
+  const [{ x }, set] = useSpring(() => ({
     x: 0
   }))
 
@@ -69,17 +68,6 @@ const ListItem = ({
       memo,
       cancel
     }) => {
-      if (!memo) {
-        const isIntentionalGesture =
-          Math.abs(movementX) > threshold &&
-          Math.abs(movementX) > Math.abs(movementY)
-
-        if (!isIntentionalGesture) {
-          if (!willTransform) setWillTransform(true)
-          return
-        }
-        memo = x.value - movementX
-      }
 
       // hack
       const isSwipeNavigation = deltaX < -200 && velocityX > -100
@@ -88,7 +76,7 @@ const ListItem = ({
       let newX
       let onRest = () => {}
       if (last) {
-        const projectedEndpoint = x.value + projection(velocityX, "fast")
+        const projectedEndpoint = x.get() + projection(velocityX, "fast")
         newX = findNearestNumberInArray(projectedEndpoint, stops.current)
         if (newX === stops.current[2]) {
           onRest = ({ x }) => {
@@ -111,6 +99,7 @@ const ListItem = ({
       set({
         x: newX,
         immediate: !last,
+        velocity: last ? velocityX : undefined,
         onRest,
         config: {
           ...spring,
@@ -119,6 +108,10 @@ const ListItem = ({
       })
 
       return memo
+    }, {
+      // axis: 'x',
+     // filterClicks: true,
+      // threshold,
     }
   )
 
@@ -129,6 +122,7 @@ const ListItem = ({
       willTransform={willTransform}
       isBeingDeleted={isBeingDeleted}
       data-list-id={id}
+      onClick={()=> alert('clicked')}
     >
       <StyledListItem
         as={animated.div}

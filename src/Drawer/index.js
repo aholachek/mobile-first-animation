@@ -1,9 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { animated } from "react-spring"
+import { animated, useSpring } from "react-spring"
 import { useDrag } from "react-use-gesture"
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock"
-import useVelocityTrackedSpring from "../useVelocityTrackedSpring"
 import {
   projection,
   rubberBandIfOutOfBounds,
@@ -15,7 +14,7 @@ import * as Styles from "./styled-components"
 const threshold = 10
 
 const BottomDrawer = ({ removeDrawer, children }) => {
-  const [{ y }, set] = useVelocityTrackedSpring(() => ({ y: 0 }))
+  const [{ y }, set] = useSpring(() => ({ y: 0 }))
   const yStops = React.useRef([])
   const containerRef = React.useRef(null)
 
@@ -34,7 +33,7 @@ const BottomDrawer = ({ removeDrawer, children }) => {
       if (!memo) {
         const isIntentionalGesture = Math.abs(movementY) > threshold
         if (!isIntentionalGesture) return
-        memo = y.value - movementY
+        memo = y.get() - movementY
       }
 
       disableBodyScroll(containerRef.current)
@@ -42,18 +41,19 @@ const BottomDrawer = ({ removeDrawer, children }) => {
       if (last) {
         enableBodyScroll(containerRef.current)
 
-        const projectedEndpoint = y.value + projection(velocityY)
+        const projectedEndpoint = y.get() + projection(velocityY)
         const point = findNearestNumberInArray(
           projectedEndpoint,
           yStops.current
         )
 
         const notificationClosed = point === yStops.current[1]
-
+          debugger
         return set({
           y: notificationClosed ? yStops.current[1] : yStops.current[0],
           onRest: notificationClosed ? removeDrawer : () => {},
-          immediate: false
+          immediate: false,
+          velocity: velocityY
         })
       }
 

@@ -86,7 +86,7 @@ const ApplePlaylist = () => {
     }) => {
       event.preventDefault()
 
-      const drawerIsOpen = y.value === stops[1]
+      const drawerIsOpen = y.get() === stops[1]
 
       const isClick =
         last && Math.abs(movementX) + Math.abs(movementY) <= 3 && !drawerIsOpen
@@ -100,13 +100,13 @@ const ApplePlaylist = () => {
 
         if (!isIntentionalGesture) return
         disableBodyScroll(nowPlayingDrawerRef.current)
-        memo = y.value - movementY
+        memo = y.get() - movementY
       }
 
       if (last) {
         enableBodyScroll(nowPlayingDrawerRef.current)
 
-        const projectedEndpoint = y.value + projection(velocityY)
+        const projectedEndpoint = y.get() + projection(velocityY)
         const point = findNearestNumberInArray(projectedEndpoint, stops)
 
         return set({

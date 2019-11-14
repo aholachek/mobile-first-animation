@@ -30,11 +30,11 @@ const Notification = ({ children, hideNotification }) => {
       if (!memo) {
         const isIntentionalGesture = Math.abs(movementY) > threshold
         if (!isIntentionalGesture) return
-        memo = y.value - movementY
+        memo = y.get() - movementY
       }
 
       if (last) {
-        const projectedEndpoint = y.value + projection(velocityY)
+        const projectedEndpoint = y.get() + projection(velocityY)
         const point = findNearestNumberInArray(projectedEndpoint, yStops)
 
         const notificationClosed = point === yStops[1]
