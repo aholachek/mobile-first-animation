@@ -122,7 +122,7 @@ const ListItem = ({
       willTransform={willTransform}
       isBeingDeleted={isBeingDeleted}
       data-list-id={id}
-      onClick={()=> alert('clicked')}
+      // onClick={()=> alert('clicked')}
     >
       <StyledListItem
         as={animated.div}
