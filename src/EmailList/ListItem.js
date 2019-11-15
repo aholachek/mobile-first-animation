@@ -68,9 +68,7 @@ const ListItem = ({
       cancel,
       direction,
       offset,
-      ...rest
     }) => {
-      console.log(rest)
       // hack
       const isSwipeNavigation = deltaX < -200 && velocityX > -100
       if (isSwipeNavigation) return cancel()
@@ -91,11 +89,10 @@ const ListItem = ({
           }
         }
       } else {
-        const cachedMovement = memo + offset[0] > 0 ? -threshold : threshold
         newX = rubberBandIfOutOfBounds(
           stops.current[2],
           stops.current[0],
-          cachedMovement + movementX
+          memo + movementX
         )
       }
 

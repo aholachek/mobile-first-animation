@@ -8349,10 +8349,10 @@ react-spring@9.0.0-canary.809.5.f01ecc2:
     "@react-spring/web" "9.0.0-canary.809.5.f01ecc2"
     "@react-spring/zdog" "9.0.0-canary.809.5.f01ecc2"
 
-react-use-gesture@7.0.0-alpha.15:
-  version "7.0.0-alpha.15"
-  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-7.0.0-alpha.15.tgz#8fda6910ebc590b2ed2915f1ab403ad3b787ea1d"
-  integrity sha512-EUacYf4gbrxNZsAg/i0YTn+yyko014A6Y346zb551IMvWNxEmvLa+1hk5mrVj4HEkhrPErvJtCb3KAxB+ybH5Q==
+react-use-gesture@7.0.0-alpha.18:
+  version "7.0.0-alpha.18"
+  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-7.0.0-alpha.18.tgz#ddc94525399e2ca77964d58de0c46d3d931f9cef"
+  integrity sha512-rn5onSLkQrMRzgyDPa0BrlYCqTiH/xFJMvEgUspbzPJ6BKudSCqpXk1yBbsw+J1cGXutozjtOhjUmynL2FiAxA==
 
 react@^16.11.0:
   version "16.11.0"
