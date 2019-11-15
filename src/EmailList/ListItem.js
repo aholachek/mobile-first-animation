@@ -16,7 +16,7 @@ import {
 } from '../utilities'
 
 const actionWidth = 100
-const threshold = 15
+const threshold = 30
 
 const spring = {
   tension: 439,
