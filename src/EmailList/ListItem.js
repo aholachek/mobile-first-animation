@@ -1,19 +1,19 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from 'react'
 import {
   StyledAction,
   StyledListItem,
   StyledListItemContainer,
   StyledEmail,
   StyledAvatar
-} from "./styled-components"
-import { animated, useSpring } from "react-spring"
-import { useDrag } from "react-use-gesture"
+} from './styled-components'
+import { animated, useSpring } from 'react-spring'
+import { useDrag } from 'react-use-gesture'
 import {
   rubberBandIfOutOfBounds,
   findNearestNumberInArray,
   projection,
   range
-} from "../utilities"
+} from '../utilities'
 
 const actionWidth = 100
 const threshold = 15
@@ -35,7 +35,6 @@ const ListItem = ({
 }) => {
   const itemRef = useRef(null)
   const stops = useRef(null)
-  const [willTransform, setWillTransform] = useState(null)
 
   useEffect(() => {
     stops.current = [0, actionsOpen, -itemRef.current.clientWidth]
@@ -62,13 +61,12 @@ const ListItem = ({
   const bind = useDrag(
     ({
       vxvy: [velocityX],
-      movement: [movementX, movementY],
+      movement: [movementX],
       delta: [deltaX],
       last,
-      memo,
+      memo = x.get(),
       cancel
     }) => {
-
       // hack
       const isSwipeNavigation = deltaX < -200 && velocityX > -100
       if (isSwipeNavigation) return cancel()
@@ -76,7 +74,7 @@ const ListItem = ({
       let newX
       let onRest = () => {}
       if (last) {
-        const projectedEndpoint = x.get() + projection(velocityX, "fast")
+        const projectedEndpoint = x.get() + projection(velocityX, 'fast')
         newX = findNearestNumberInArray(projectedEndpoint, stops.current)
         if (newX === stops.current[2]) {
           onRest = ({ x }) => {
@@ -108,10 +106,11 @@ const ListItem = ({
       })
 
       return memo
-    }, {
+    },
+    {
       axis: 'x',
-     filterClicks: true,
-      threshold,
+      filterClicks: true,
+      threshold
     }
   )
 
@@ -119,10 +118,9 @@ const ListItem = ({
     <StyledListItemContainer
       ref={itemRef}
       onTouchStart={bind().onTouchStart}
-      willTransform={willTransform}
       isBeingDeleted={isBeingDeleted}
       data-list-id={id}
-      // onClick={()=> alert('clicked')}
+      onClick={() => alert('clicked')}
     >
       <StyledListItem
         as={animated.div}
