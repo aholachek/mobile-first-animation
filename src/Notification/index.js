@@ -87,7 +87,9 @@ const NotificationDemo = () => {
           setNotificationVisible(prevShow => !prevShow)
         }}
       >
-        👇 show notification
+        <span role="img" aria-label="show notification">
+          👇show notification
+        </span>
       </button>
       {notificationVisible && (
         <Notification
@@ -96,7 +98,11 @@ const NotificationDemo = () => {
             setNotificationVisible(false)
           }}
         >
-          <div>🐶</div>
+          <div>
+            <span role="img" aria-label="dog">
+              🐶
+            </span>
+          </div>
           <div>&nbsp;&nbsp;just saying hi</div>
         </Notification>
       )}

@@ -74,13 +74,11 @@ function App() {
                 <StyledNav>
                   <h1>Touch-driven mobile animation examples</h1>
                   <ul>
-                    {routes.map(r => {
-                      return (
-                        <li>
-                          <Link to={r.path}>{r.title}</Link>
-                        </li>
-                      )
-                    })}
+                    {routes.map(r => (
+                      <li key={r.title}>
+                        <Link to={r.path}>{r.title}</Link>
+                      </li>
+                    ))}
                   </ul>
                 </StyledNav>
               )
@@ -89,7 +87,7 @@ function App() {
           {routes.map(r => {
             const Component = r.component
             return (
-              <Route path={r.path}>
+              <Route path={r.path} key={r.path}>
                 <Component />
               </Route>
             )
