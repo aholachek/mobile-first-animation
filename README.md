@@ -1,5 +1,7 @@
 # Mobile First Animation in React
 
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/aholachek/mobile-first-animation)
+
 <a href="https://codesandbox.io/s/github/aholachek/mobile-first-animation">
 <img src="./demos/tabs.gif" alt="swipeable tabs" height="350px">
 </a>
@@ -37,3 +39,17 @@ You can play with the [spring demo from the talk here.](https://spring-playgroun
 - If you find any bugs or UI inconsistencies, please make an issue!
 - These are animation demos and as such they are not production-ready UI code. They are not fully accessible, and don't have desktop variants.
 - Adhering to animation best practices can ensure that animations perform acceptably on newer "average", sub-$200 devices. However, there are some devices (older or very inexpensive phones) that will have difficulties achieving minimally acceptable animation performance. Make sure to test your animations on the phones of your target audience before committing to add them.
+
+## Contributing
+
+### Contributing online with a single click
+
+You can use Gitpod (A Free online VS Code-like IDE) for contributing. With a single click, it will launch a workspace and automatically:
+
+- clone mobile-first-animation repo.
+- install the dependencies.
+- run `yarn run start`.
+
+So that you can start straight away.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/aholachek/mobile-first-animation)
