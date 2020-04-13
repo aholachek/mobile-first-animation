@@ -237,7 +237,7 @@ const ApplePlaylist = () => {
       <TabBar
         as={animated.div}
         style={{
-          opacity: y.interpolate([stops], [1, 0]),
+          opacity: y.interpolate(stops, [1, 0]),
           transform: y.interpolate(y => {
             const translateY = rangeMap(stops, [0, 60], y)
             return `translate3D(0px, ${translateY}px, 0)`

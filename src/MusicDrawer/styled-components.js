@@ -46,7 +46,6 @@ export const Handle = styled.div`
   height: 0.4rem;
   background-color: hsla(0, 0%, 0%, 0.1);
   border-radius: 9px;
-  position: absolute;
   top: 1rem;
   position: absolute;
   left: 50%;
@@ -72,7 +71,6 @@ export const NowPlayingDrawer = styled.div`
 
 export const ClosedControlsContainer = styled.div`
   position: absolute;
-  right: 0;
   top: 1.7rem;
   right: 12px;
 
@@ -133,7 +131,6 @@ export const NowPlayingImage = styled.img.attrs({
   transform-origin: 0 0;
   display: block;
   margin-right: 1rem;
-  position: relative;
   z-index: 1;
   transform: scale(0.3333);
   position: absolute;
