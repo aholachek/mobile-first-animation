@@ -26,7 +26,7 @@ class Flipper {
     // we need to figure out what the "real" final state is without any residual transform from an interrupted animation
     el.style.transform = ""
 
-    const after = this.measure(id, true)
+    const after = this.measure(id)
     const before = this.positions[id]
     const scaleX = before.width / after.width
     const scaleY = before.height / after.height
