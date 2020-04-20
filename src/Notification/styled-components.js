@@ -9,7 +9,7 @@ export const StyledNotification = styled.div`
   padding: 0.5rem 2rem 0.5rem 2rem;
   background-color: #171226;
   color: white;
-  box-shadow: 0 0 0 1px transparent, 0 3px 10px #00000026;
+  box-shadow: 0 0 0 1px transparent, 0 3px 10px #000026;
   user-select: none;
   min-width: 70vw;
   pointer-events: all;
